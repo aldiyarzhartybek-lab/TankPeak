@@ -27,6 +27,10 @@ public class WargamingApiClient : IWargamingApiClient
         using JsonDocument doc2 = JsonDocument.Parse(WotJson2);
         var accountState = doc2.RootElement.GetProperty("data").GetProperty($"{accountId}").GetProperty("statistics").GetProperty("all");
         var stats = JsonSerializer.Deserialize<PlayerStats>(accountState.ToString());
+        if (stats is null)
+        {
+            throw new Exception("No stats found");
+        }
         return stats;
     }
 }
