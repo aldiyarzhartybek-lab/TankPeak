@@ -2,7 +2,7 @@
 using MTstat.Models;
 using System.Text.Json;
 
-public class LestaApiClient : ILestaApiClient
+public class WargamingApiClient : IWargamingApiClient
 {
     
     private const string ApplicationId = "006d9f9399c0f834d68d2087b2a76aca";

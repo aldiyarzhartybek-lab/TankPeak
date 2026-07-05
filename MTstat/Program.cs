@@ -1,8 +1,6 @@
-﻿using System.Text.Json;
-using MTstat.Models; 
-using MTstat.ApiClients;
+﻿using MTstat.ApiClients;
 
-var client = new LestaApiClient();
+var client = new WargamingApiClient();
 var accountId = await client.GetAccountIdAsync("___Tank___");
 var stats =  await client.GetPlayerStatsAsync(accountId);
 
