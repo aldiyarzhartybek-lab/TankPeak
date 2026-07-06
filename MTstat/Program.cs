@@ -1,4 +1,5 @@
 ﻿using MTstat.ApiClients;
+using MTstat.Models;
 using MTstat.Services;
 
 var client = new WargamingApiClient();
@@ -9,19 +10,29 @@ try
     var stats = await client.GetPlayerStatsAsync(accountId);
 
     var analyzer = new PlayerAnalyzer();
-    var result = analyzer.Analyze(stats); 
+    var result = analyzer.Analyze(stats);
+
+    string WeaknessesToText(WeaknessType type) => type switch
+    {
+        WeaknessType.LowAvgDamage => "Низкий средний урон",
+        WeaknessType.LowWinRate => "Низкий винрейт",
+        WeaknessType.LowSurvival => "Низкая выживаемость",
+        _ => "XZ ohibka"
+    };
+
+   
     
     Console.WriteLine($"WinRate {result.WinRate}");
-    
-    
-    
     Console.WriteLine($"Battles {stats.Battles}");
     Console.WriteLine($"Wins {stats.Wins}");
     Console.WriteLine($"Losses {stats.Losses}");
     Console.WriteLine($"DamageDealt {stats.DamageDealt}");
     Console.WriteLine($"HitsPercents {stats.HitsPercents}");
     Console.WriteLine($"Survived {stats.SurvivedBattles}");
-    Console.WriteLine($"Weaknesses {string.Join(", ", result.Weaknesses)}");
+    foreach (var resultWeakness in result.Weaknesses)
+    {
+        Console.WriteLine(WeaknessesToText(resultWeakness));
+    }
 }
 catch (Exception ex)
 {

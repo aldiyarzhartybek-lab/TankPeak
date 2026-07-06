@@ -6,5 +6,5 @@ public class AnalysisResult
     public double Survived { get; set; }
     public int AvgDamage {get; set;}
     
-    public List<string> Weaknesses { get; set; } = new();
+    public List<WeaknessType> Weaknesses { get; set; } = new();
 }

@@ -14,17 +14,17 @@ public class PlayerAnalyzer : IPlayerAnalyzer
         result.AvgDamage = playerStats.DamageDealt / playerStats.Battles;
         if (result.WinRate < MinWinRate)
         {
-            result.Weaknesses.Add("Низкий винрейт");
+            result.Weaknesses.Add(WeaknessType.LowWinRate);
         }
 
         if (result.Survived < MinSurvived)
         {
-            result.Weaknesses.Add("Низкая выживаемость");
+            result.Weaknesses.Add(WeaknessType.LowSurvival);
         }
 
         if (result.AvgDamage < MinAvgDamage)
         {
-            result.Weaknesses.Add("Малый средний урон");
+            result.Weaknesses.Add(WeaknessType.LowAvgDamage);
         }
         
         return result;
