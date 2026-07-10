@@ -9,25 +9,31 @@ public class PlayerAnalyzer : IPlayerAnalyzer
     public AnalysisResult Analyze(PlayerStats playerStats)
     {
         var result = new AnalysisResult();
-        result.WinRate = Math.Round((double) playerStats.Wins / playerStats.Battles * 100 ,2) ;
-        result.Survived = Math.Round((double) playerStats.SurvivedBattles / playerStats.Battles * 100 ,2) ;
-        result.AvgDamage = playerStats.DamageDealt / playerStats.Battles;
-        if (result.WinRate < MinWinRate)
+        if (playerStats.Battles <= 0)
         {
-            result.Weaknesses.Add(WeaknessType.LowWinRate);
+            result.HasBattles = false;
         }
+        else
+        {
+            result.HasBattles = true;
+            result.WinRate = Math.Round((double)playerStats.Wins / playerStats.Battles * 100, 2);
+            result.Survived = Math.Round((double)playerStats.SurvivedBattles / playerStats.Battles * 100, 2);
+            result.AvgDamage = playerStats.DamageDealt / playerStats.Battles;
+            if (result.WinRate < MinWinRate)
+            {
+                result.Weaknesses.Add(WeaknessType.LowWinRate);
+            }
 
-        if (result.Survived < MinSurvived)
-        {
-            result.Weaknesses.Add(WeaknessType.LowSurvival);
-        }
+            if (result.Survived < MinSurvived)
+            {
+                result.Weaknesses.Add(WeaknessType.LowSurvival);
+            }
 
-        if (result.AvgDamage < MinAvgDamage)
-        {
-            result.Weaknesses.Add(WeaknessType.LowAvgDamage);
+            if (result.AvgDamage < MinAvgDamage)
+            {
+                result.Weaknesses.Add(WeaknessType.LowAvgDamage);
+            }
         }
-        
         return result;
-        
     }
 }

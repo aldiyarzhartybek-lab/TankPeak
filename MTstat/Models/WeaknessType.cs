@@ -4,5 +4,7 @@ public enum WeaknessType
 {
     LowWinRate,
     LowSurvival, 
-    LowAvgDamage
+    LowAvgDamage,
+    HasBattles,
 }
+

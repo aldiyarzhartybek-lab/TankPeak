@@ -17,21 +17,28 @@ try
         WeaknessType.LowAvgDamage => "Низкий средний урон",
         WeaknessType.LowWinRate => "Низкий винрейт",
         WeaknessType.LowSurvival => "Низкая выживаемость",
-        _ => "XZ ohibka"
+        _ => "хЗ Чтот"
     };
 
-   
-    
-    Console.WriteLine($"WinRate {result.WinRate}");
-    Console.WriteLine($"Battles {stats.Battles}");
-    Console.WriteLine($"Wins {stats.Wins}");
-    Console.WriteLine($"Losses {stats.Losses}");
-    Console.WriteLine($"DamageDealt {stats.DamageDealt}");
-    Console.WriteLine($"HitsPercents {stats.HitsPercents}");
-    Console.WriteLine($"Survived {stats.SurvivedBattles}");
-    foreach (var resultWeakness in result.Weaknesses)
+    if (!result.HasBattles)
     {
-        Console.WriteLine(WeaknessesToText(resultWeakness));
+        Console.WriteLine("Player dont have battles");
+    }
+    else
+    {
+
+
+        Console.WriteLine($"WinRate {result.WinRate}");
+        Console.WriteLine($"Battles {stats.Battles}");
+        Console.WriteLine($"Wins {stats.Wins}");
+        Console.WriteLine($"Losses {stats.Losses}");
+        Console.WriteLine($"DamageDealt {stats.DamageDealt}");
+        Console.WriteLine($"HitsPercents {stats.HitsPercents}");
+        Console.WriteLine($"Survived {stats.SurvivedBattles}");
+        foreach (var resultWeakness in result.Weaknesses)
+        {
+            Console.WriteLine(WeaknessesToText(resultWeakness));
+        }
     }
 }
 catch (Exception ex)
