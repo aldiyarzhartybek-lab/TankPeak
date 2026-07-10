@@ -3,6 +3,7 @@ using System.Text.Json.Serialization;
 
 public class PlayerStats
 {
+    public int Id { get; set;}
     [JsonPropertyName("battles")]
     public int Battles { get; set; }
     [JsonPropertyName("wins")]
