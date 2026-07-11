@@ -18,9 +18,18 @@ try
    
     var db = new AppDbContext();
     db.Database.Migrate();
-    db.PlayerStats.Add(stats);
-    db.SaveChanges();
-    Console.WriteLine($"Записей в базе: {db.PlayerStats.Count()}");
+    bool exists = db.PlayerStats.Any(s=> s.Battles == stats.Battles && s.Wins == stats.Wins);
+    if (!exists)
+    {
+        db.PlayerStats.Add(stats);
+        db.SaveChanges();
+        Console.WriteLine($"Записей в базе: {db.PlayerStats.Count()}");
+    }
+    else
+    {
+        Console.WriteLine("Ничего не поменялось");
+        Console.WriteLine($"Записей в базе: {db.PlayerStats.Count()}");
+    }
     
     string WeaknessesToText(WeaknessType type) => type switch
     {
